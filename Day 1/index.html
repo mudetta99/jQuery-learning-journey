@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <title>Task 1</title>
+
+</head>
+<body>
+
+    <div class="container">
+        <button id="about">About</button>
+
+        <div class="dropdown">
+          <button id="services">Services</button>
+          <div class="dropdown-content">
+              <ul>
+            
+            <li><a href="#" id="item1">Item 1</a></li>
+            
+            <li><a href="#" id="item2">Item 2</a></li>
+            
+            <li><a href="#" id="item3">Item 3</a></li>
+              </ul>
+          </div>
+        </div>
+      
+        <button id="gallery">Gallery</button>
+        <button id="complain">Complain</button>
+      
+        <div class="content"></div>
+    </div>
+
+  <script>
+    $(document).ready(function () {
+
+      $("#about").click(function () {
+        $(".content").html("<p>Story about snow man</p>");
+      });
+
+      $("#gallery").click(function () {
+        let galleryHTML = `
+          <div class="gallery">
+            <button id="prev">←</button>
+            <img src="#" id="galleryImage">
+            <button id="next">→</button>
+          </div>
+        `;
+        $(".content").html(galleryHTML);
+
+        let images = ["1.jpg", "2.jpg", "3.jpg","4.jpg", "5.jpg","6.jpg", "7.jpg"];
+        let i = 0;
+
+        function updateImage() {
+          $("#galleryImage").attr("src", images[i]);
+        }
+
+
+        $('#next').click(function () {
+            i++;
+
+            if ( i > images.length) {
+                i = 1;
+            }
+            
+            updateImage();
+        });
+
+        $('#prev').click(function () {
+            i-=1;
+            if (i < 0) {
+                i = images.length -1;
+            }
+
+            updateImage();
+        });
+
+        updateImage();
+      });
+
+      $("#services").click(function () {
+        $(".dropdown-content").show();
+      });
+
+
+      $("#complain").click(function () {
+        let complainHTML = `
+          <form id="complainForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br><br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" required><br><br>
+            <label for="complaint">Complaint:</label><br>
+            <textarea id="complaint" name="complaint" rows="4" cols="50" required></textarea><br><br>
+            <button type="submit">Send</button>
+          </form>
+        `;
+        $(".content").html(complainHTML);
+
+        $(".content").submit((e)=> {
+          e.preventDefault(); 
+        
+          let name = $("#name").val();
+          let email = $("#email").val();
+          let phone = $("#phone").val();
+          let complaint = $("#complaint").val();
+
+          let resultHTML = `
+            <h3>Complaint Submitted:</h3>
+            <p><strong>Name:</strong> ${name}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Phone:</strong> ${phone}</p>
+            <p><strong>Complaint:</strong> ${complaint}</p>
+            <button id="backToEdit">Back to Edit</button>
+          `;
+          $(".content").html(resultHTML);
+
+          $(".content").on("click", "#backToEdit", function () {
+            let formHTML = `
+              <form id="complainForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" value="${name}" required><br><br>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="${email}" required><br><br>
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" name="phone" value="${phone}" required><br><br>
+                <label for="complaint">Complaint:</label><br>
+                <textarea id="complaint" name="complaint" rows="4" cols="50" required>${complaint}</textarea><br><br>
+                <button type="submit">Send</button>
+              </form>
+            `;
+            $(".content").html(formHTML);
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>
