@@ -1,0 +1,92 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <title>Document</title>
+</head>
+<style>
+    #img1{
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        height: 200px;
+    }
+
+</style>
+<body>
+
+
+    <img src="1.gif" id="img1">
+    <p></p>
+    <script>
+        $(document).ready(function(){
+            $('#img1').animate({left:"+=800px"},5000,"linear")
+
+        })
+    </script>
+    
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <title>Moving Car</title>
+</head>
+<style>
+
+    .container {
+        max-width: 900px;
+    }
+
+    #img1 {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        height: 200px;
+    }
+    #text {
+        position: absolute;
+        top: 210px;
+        left: 5px;
+        font-size: 20px;
+    }
+</style>
+<body>
+    <div class="container">
+        <img src="1.gif" id="img1">
+        <p id="text"></p>
+
+    </div>
+
+    
+    <script>
+        $(document).ready(function(){
+            // let value = 0;
+            let totalDistance = 700;
+            $('#img1').animate({left: "+=700px"}, 5000, "linear");
+
+            let imgLeft = $('#img1').css('left');
+            imgLeft = parseInt(imgLeft, 10);
+            let interval  = setInterval(function() {
+                // value += 1;
+                $('#text').text(`<img src="1.gif" style='left: ${imgLeft++} px' id="img1">`);
+
+                if (imgLeft >= totalDistance) {
+                clearInterval(interval);  
+            }
+            },7);
+        });
+    </script>
+</body>
+</html>

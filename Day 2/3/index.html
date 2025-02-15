@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draggable and Droppable</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+
+        #droppable {
+            width: 500px;
+            position: relative;
+            margin: 20px auto;
+        }
+
+        #draggable {
+            width: 100px;
+            height: 100px;
+            cursor: grab;
+        }
+
+        img {
+            display: block;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>Droppables</h1>
+    <hr>
+    <div id="droppable">
+        <img src="3.JPG"  style="width: 200px; height: 200px;">
+    </div>
+    <div id="draggable">
+        <img id="img1" src="2.jpg"  style="width: 100px; height: 100px;">
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+        $(function () {
+            // $("#draggable").draggable({
+            //     start: function () {
+            //         $(this).effect("shake", { distance: 5, times: 2 }, 300);
+            //     }
+            // });
+
+            $("#draggable").draggable();
+
+            $("#droppable").droppable({
+                over: function () {
+                    $('#img1').effect("shake", { distance: 5, times: 2 }, 300);
+                },
+                drop: function (event, ui) {
+                    $(ui.draggable).effect("shake", { distance: 10, times: 3 }, 500, function () {
+                        $('#img1').fadeOut();
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

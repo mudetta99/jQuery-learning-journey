@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <title>Bonus</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin-top: 50px;
+        }
+
+        #img1 {
+            width: 200px;
+            height: auto;
+            transition: transform 1s ease;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <img id="img1" src="1.jpg" alt="Flowers">
+
+    <script>
+        $(function () {
+            $("#img1").on("click", function () {
+                
+                $(this).css("transform", "scale(1.5) rotate(360deg)");
+
+                setTimeout(() => {
+                    $(this).css("transform", "scale(1) rotate(0deg)");
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+</html>
